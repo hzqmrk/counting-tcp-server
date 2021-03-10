@@ -7,8 +7,8 @@
 #include <netinet/tcp.h>
 
 #define SS_DEBUG (0)
-#define NO_NAGLE (1)
-#define QUICKACK (1)
+#define NO_NAGLE (0)
+#define QUICKACK (0)
 
 #define RX_BUFF_SIZE (1525)
 #define TX_BUFF_SIZE (1525)
@@ -131,6 +131,8 @@ int main(int argc, char *argv[]) {
 		}
 
 		if (receiveBuff[8] == '0' + END_LINK) {
+
+			sleep(0.5);
 
 			// reply with end time
 			ticks = time(NULL);
