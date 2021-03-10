@@ -126,11 +126,12 @@ int main(int argc, char *argv[]) {
 			}
 			printf("\n");
 #else
-			printf("%02x\n", receiveBuff[0]);
+			//printf("%02x\n", receiveBuff[0]);
+			printf("%s", receiveBuff);
 #endif
 		}
 
-		if (receiveBuff[0] == END_LINK) {
+		if (receiveBuff[8] == END_LINK) {
 
 			// reply with end time
 			ticks = time(NULL);
