@@ -13,7 +13,7 @@
 #define RX_BUFF_SIZE (1525)
 #define TX_BUFF_SIZE (1525)
 
-#define END_LINK (10)
+#define END_LINK (9)
 
 void wait_connect(int lfd, int *cfd) {
 
