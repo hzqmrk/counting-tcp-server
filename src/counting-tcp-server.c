@@ -14,6 +14,8 @@
 #define RX_BUFF_SIZE (1525)
 #define TX_BUFF_SIZE (1525)
 
+#define SLEEP_USECS (250000)
+
 #define END_LINK (9)
 
 void wait_connect(int lfd, int *cfd) {
@@ -45,7 +47,9 @@ int main(int argc, char *argv[]) {
 	char receiveBuff[RX_BUFF_SIZE];
 	char sendBuff[TX_BUFF_SIZE];
 	time_t ticks;
+#if (QUICKACK ==1) || (NO_NAGLE ==1)
 	int one = 1;
+#endif
 
 	// open file descriptor for IPV4 server
 	listenfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -133,7 +137,7 @@ int main(int argc, char *argv[]) {
 
 		if (receiveBuff[8] == '0' + END_LINK) {
 
-			sleep(2);
+			usleep(SLEEP_USECS);
 
 			// reply with end time
 			ticks = time(NULL);
@@ -151,7 +155,7 @@ int main(int argc, char *argv[]) {
 		}
 
 		// wait a little before starting again
-		sleep(2);
+		usleep(SLEEP_USECS);
 	}
 
 	// close connection
