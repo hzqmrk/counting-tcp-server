@@ -133,7 +133,7 @@ int main(int argc, char *argv[]) {
 
 		if (receiveBuff[8] == '0' + END_LINK) {
 
-			sleep(0.5);
+			sleep(2);
 
 			// reply with end time
 			ticks = time(NULL);
@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
 		}
 
 		// wait a little before starting again
-		sleep(0.05);
+		sleep(2);
 	}
 
 	// close connection
