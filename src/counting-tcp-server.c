@@ -10,6 +10,7 @@
 #define NO_NAGLE (0)
 #define QUICKACK (0)
 
+#define TCP_PORT (5127)
 #define RX_BUFF_SIZE (1525)
 #define TX_BUFF_SIZE (1525)
 
@@ -69,7 +70,7 @@ int main(int argc, char *argv[]) {
 	// bind for ANY IPV4 address on ALL interfaces
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serv_addr.sin_port = htons(5000);
+	serv_addr.sin_port = htons(TCP_PORT);
 	tmp = bind(listenfd, (struct sockaddr*) &serv_addr, sizeof(serv_addr));
 	if (tmp != 0) {
 		perror("\n Error : Unable to bind to requested address or port \n");
