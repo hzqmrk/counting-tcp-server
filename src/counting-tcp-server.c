@@ -8,6 +8,7 @@
 
 #define SS_DEBUG (0)
 #define NO_NAGLE (1)
+#define QUICKACK (1)
 
 #define RX_BUFF_SIZE (1525)
 #define TX_BUFF_SIZE (1525)
@@ -87,6 +88,16 @@ int main(int argc, char *argv[]) {
 
 		if (connfd == 0) {
 			wait_connect(listenfd, &connfd);
+
+#if (QUICKACK ==1)
+			// don't wait to ack (must be done after connected)
+			tmp = setsockopt(listenfd, SOL_TCP, TCP_QUICKACK, &one,
+					sizeof(one));
+			if (tmp < 0) {
+				printf("\n Error : Could not set socket option \n");
+				return 1;
+			}
+#endif
 
 			// reply with current time
 			ticks = time(NULL);
